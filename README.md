@@ -1,4 +1,5 @@
 note;
+
 step1: rename asv_wave_sim_gazebo1 to asv_wave_sim_gazebo
 
 added under src/asv_wave_sim
@@ -6,9 +7,13 @@ added under src/asv_wave_sim
 step 2: added slam_gmapping under src/
 
 step 3: build your workspace and launched ocean_world.launch
+
 step 4: go to rviz windows and added from display the map
+
 step 5: added the topic in map 
+
 step 6: open new terminal and write this command: rosrun map_server map_saver -f my_map
+
 step 7: added in gazebo the barrage near the boat and jus apply any force on baseboat 
 
 
