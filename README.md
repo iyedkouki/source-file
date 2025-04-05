@@ -1,6 +1,8 @@
 note;
-step1: rename asv_wave_sim_gazebo1 to asv_wave_sim_gazebo\n
+step1: rename asv_wave_sim_gazebo1 to asv_wave_sim_gazebo
+
 added under src/asv_wave_sim
+
 step 2: added slam_gmapping under src/
 
 step 3: build your workspace and launched ocean_world.launch
