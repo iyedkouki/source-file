@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<sdf version='1.6'>
+  <model name='boatcleaningc'>
+  <pose>0 0 1 0 0 0</pose>
+  <static>false</static>
+
+    <!-- Hydrodynamics plugin -->
+    <plugin filename="libHydrodynamicsPlugin.so" name="hydrodynamics">
+      <!-- Wave Model -->
+      <wave_model>ocean_waves</wave_model>
+      <!-- Hydrodynamics -->
+      <damping_on>true</damping_on>
+      <viscous_drag_on>true</viscous_drag_on>
+      <pressure_drag_on>true</pressure_drag_on>
+      <!-- Markers -->
+      <markers>
+        <update_rate>30</update_rate>
+        <water_patch>false</water_patch>
+        <waterline>false</waterline>
+        <underwater_surface>false</underwater_surface>
+      </markers>
+    </plugin>
+    
+
+    <link name='baseboatclening'>
+      <inertial>
+        <pose>-0.015242 -1.1e-05 -0.056302 0 -0 0</pose>
+        <mass>1.7321</mass>
+        <inertia>
+          <ixx>0.151771</ixx>
+          <ixy>-3.86024e-05</ixy>
+          <ixz>-0.00771902</ixz>
+          <iyy>0.108848</iyy>
+          <iyz>-2.57208e-05</iyz>
+          <izz>0.165084</izz>
+        </inertia>
+      </inertial>
+      <collision name='baseboatclening_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/baseboatclening.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='baseboatclening_fixed_joint_lump__axedroit_collision_1'>
+        <pose>-0.263294 -0.401272 -0.256 -1.5708 -0.001745 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/axedroit.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='baseboatclening_fixed_joint_lump__axegauche_collision_2'>
+        <pose>-0.263294 0.398728 -0.256 -1.5708 -0.001745 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/axegauche.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <!-- Added sensor collision elements -->
+      <collision name='baseboatclening_fixed_joint_lump__camera_collision_3'>
+        <pose>0.265 0 0.14 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.05</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='baseboatclening_fixed_joint_lump__lidar_center_collision_4'>
+        <pose>0.265 0 0.22 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.05</length>
+            <radius>0.05</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+     
+
+      <visual name='baseboatclening_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/baseboatclening.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='baseboatclening_fixed_joint_lump__axedroit_visual_1'>
+        <pose>-0.263294 -0.401272 -0.256 -1.5708 -0.001745 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/axedroit.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='baseboatclening_fixed_joint_lump__axegauche_visual_2'>
+        <pose>-0.263294 0.398728 -0.256 -1.5708 -0.001745 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/axegauche.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!-- Added sensor visual elements -->
+      <visual name='baseboatclening_fixed_joint_lump__camera_visual_3'>
+        <pose>0.265 0 0.14 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.05 0.05</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name='baseboatclening_fixed_joint_lump__lidar_center_visual_4'>
+        <pose>0.265 0 0.22 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.05</length>
+            <radius>0.05</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    
+
+      <!-- Added sensors -->
+      <sensor name='camera_sensor' type='camera'>
+        <update_rate>30</update_rate>
+        <camera name='camera'>
+          <horizontal_fov>2.0944</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+          <alwaysOn>1</alwaysOn>
+          <updateRate>30</updateRate>
+          <cameraName>camera</cameraName>
+          <frameName>camera</frameName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <hackBaseline>0.07</hackBaseline>
+        </plugin>
+        <pose>0.265 0 0.14 0 -0 0</pose>
+      </sensor>
+
+      <sensor name='lidar' type='ray'>
+        <visualize>1</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10</max>
+            <resolution>0.03</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_laser' filename='libgazebo_ros_laser.so'>
+          <topicName>/scan</topicName>
+          <frameName>lidar_center</frameName>
+        </plugin>
+        <pose>0.265 0 0.22 0 -0 0</pose>
+      </sensor>
+
+     
+    </link>
+
+    <joint name='fandroitjoint' type='revolute'>
+      <pose relative_to='baseboatclening'>-0.268799 -0.401272 -0.256 -0.003442 0 4e-06</pose>
+      <parent>baseboatclening</parent>
+      <child>fandroit</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    
+    <link name='fandroit'>
+      <pose relative_to='fandroitjoint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.011172 -0 0 0 -0 0</pose>
+        <mass>0.00795786</mass>
+        <inertia>
+          <ixx>3.72711e-06</ixx>
+          <ixy>2.1297e-13</ixy>
+          <ixz>-8.34019e-13</ixz>
+          <iyy>2.39332e-06</iyy>
+          <iyz>-4.61638e-10</iyz>
+          <izz>2.39448e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='fandroit_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/fandroit.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='fandroit_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/fandroit.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name='fangauchejoint' type='revolute'>
+      <pose relative_to='baseboatclening'>-0.269815 0.398728 -0.256 -0.003442 0 4e-06</pose>
+      <parent>baseboatclening</parent>
+      <child>fangauche</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name='fangauche'>
+      <pose relative_to='fangauchejoint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.012188 -0 0 0 -0 0</pose>
+        <mass>0.00795786</mass>
+        <inertia>
+          <ixx>3.72711e-06</ixx>
+          <ixy>2.1297e-13</ixy>
+          <ixz>-8.34019e-13</ixz>
+          <iyy>2.39332e-06</iyy>
+          <iyz>-4.61638e-10</iyz>
+          <izz>2.39448e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='fangauche_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/fangauche.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='fangauche_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://boatcleaningc/meshes/fangauche.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <!-- Added frames for sensors -->
+    <frame name='axedroitjoint' attached_to='baseboatclening'>
+      <pose>-0.263294 -0.401272 -0.256 -1.5708 -0.001745 -1.5708</pose>
+    </frame>
+    <frame name='axedroit' attached_to='axedroitjoint'/>
+    <frame name='axegauchejoint' attached_to='baseboatclening'>
+      <pose>-0.263294 0.398728 -0.256 -1.5708 -0.001745 -1.5708</pose>
+    </frame>
+    <frame name='axegauche' attached_to='axegauchejoint'/>
+    <frame name='lidar_center_joint' attached_to='camera'>
+      <pose>0 0 0.08 0 -0 0</pose>
+    </frame>
+    <frame name='lidar_center' attached_to='lidar_center_joint'/>
+    <frame name='camera_joint' attached_to='baseboatclening'>
+      <pose>0.265 0 0.14 0 -0 0</pose>
+    </frame>
+    <frame name='camera' attached_to='camera_joint'/>
+    
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+  <ros>
+    <namespace>/</namespace>
+    <remapping>cmd_vel:=cmd_vel</remapping>
+  </ros>
+
+  <updateRate>50.0</updateRate>
+  <leftJoint>fangauchejoint</leftJoint>
+  <rightJoint>fandroitjoint</rightJoint>
+
+  <wheelSeparation>0.8</wheelSeparation> <!-- Adjust based on real distance between wheels -->
+  <wheelDiameter>0.1</wheelDiameter>     <!-- Adjust based on actual wheel size -->
+
+  <robotBaseFrame>baseboatclening</robotBaseFrame>
+  <odomFrame>odom</odomFrame>
+  <publishWheelTF>true</publishWheelTF>
+  <publishTf>true</publishTf>
+  <publishWheelJointState>true</publishWheelJointState>
+
+  <topicName>odom</topicName>
+  <cmdVelTopic>cmd_vel</cmdVelTopic>
+</plugin>
+  </model>
+  
+  
+</sdf>
