@@ -2,7 +2,7 @@ obstacle_range: 2.5          # Max distance to detect obstacles
 raytrace_range: 3.0          # Max distance to clear free space
 footprint: [[0.5, 0.4], [0.5, -0.4], [-0.5, -0.4], [-0.5, 0.4]]  # Boat footprint
 observation_sources: scan    # Use LiDAR data
-
+#inflation
 scan:
   sensor_frame: lidar_center # Matches your URDF's LiDAR frame
   data_type: LaserScan
